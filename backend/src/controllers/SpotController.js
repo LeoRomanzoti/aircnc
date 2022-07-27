@@ -12,8 +12,11 @@ module.exports = {
 
     async store(req, res) {
         const { filename } = req.file;
-        const { company, techs, price } = req.body;
+        let { company, techs, price } = req.body;
         const { user_id } = req.headers;
+        if (price){
+            price = parseFloat(price)
+        } 
 
         const spot = await Spot.create({
             user: user_id,
